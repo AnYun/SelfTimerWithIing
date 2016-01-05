@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>點亮台灣拍貼機</title>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
+    <![endif]-->
+
+    <style>
+        .body-content {
+            margin-top: 70px;
+        }
+
+        #container {
+            width: 480px; /* Adjust TV image width */
+            height: 480px; /* Adjust TV image height */
+            position: relative;
+        }
+
+            #container label {
+                width: 480px;
+                height: 480px;
+                left: 0;
+                top: 0;
+                position: absolute;
+                z-index: 10;
+                background-image: url('images/01.png');
+                background-repeat: no-repeat;
+                background-size: 480px 480px;
+                background-position: top left;
+            }
+
+        #1container:after {
+            content: '';
+            display: block;
+            /*background: url('images/37546178_1.png') no-repeat top left transparent 480px 480px;*/
+            background-image: url('images/01.png');
+            background-repeat: no-repeat;
+            background-size: 480px 480px;
+            background-position: top left;
+            /*background-color:transparent;*/
+            width: 480px;
+            height: 480px;
+            left: 0;
+            top: 0;
+            position: absolute;
+            z-index: 10;
+        }
+
+        #container video {
+            position: absolute;
+            top: 0; /* Adjust top position */
+            left: 0; /* Adjust left position */
+            width: 480px;
+            height: 480px;
+            z-index: 5;
+        }
+
+        #Mask {
+            float: left;
+        }
+
+            #Mask label {
+                float: left;
+                list-style: none;
+                cursor: pointer;
+                margin: 2px;
+                background-image: url('images/sample.jpg');
+                background-size: cover;
+                background-position: center;
+                border: 3px solid white;
+            }
+
+                #Mask label.active {
+                    border: 3px solid #46a677;
+                }
+
+            #Mask img {
+                width: 100px;
+                height: 100px;
+            }
+    </style>
+</head>
+<body>
+    <div class="github-fork-ribbon-wrapper right">
+        <div class="github-fork-ribbon">
+            <a href="https://github.com/AnYun/SelfTimerWithIing">Fork me on GitHub</a>
+        </div>
+    </div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">點亮台灣拍貼機</a>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                如果看不到視訊鏡頭正常顯示可能是瀏覽器不支援或是視訊鏡頭驅動有問題，建議使用最新版的 Chrome。
+                寫的也有點趕，應該很多不完善的地方，大家可以自行 fork 回去修改。
+                手機應該只有 Android 手機支援，版面也沒有最佳化過，可能會有點問題。
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="container">
+                        <label></label>
+                        <input value="images/01.png" type="hidden" id="selectedImmg" />
+                        <video id="video"></video>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="Mask">
+                        <label class="active"><img src="images/01.png"></label>
+                        <label><img src="images/02.png"></label>
+                        <label><img src="images/03.png"></label>
+                        <label><img src="images/04.png"></label>
+                        <label><img src="images/05.png"></label>
+                        <label><img src="images/06.png"></label>
+                        <label><img src="images/07.png"></label>
+                        <label><img src="images/08.png"></label>
+                        <label><img src="images/09.png"></label>
+                        <label><img src="images/10.png"></label>
+                        <label><img src="images/11.png"></label>
+                        <label><img src="images/12.png"></label>
+                        <label><img src="images/13.png"></label>
+                        <label><img src="images/14.png"></label>
+                        <label><img src="images/15.png"></label>
+                        <label><img src="images/16.png"></label>
+                    </div>
+                    <button id="snap" class="btn">產生圖片</button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <canvas id="canvas" width="480" height="480"></canvas>
+
+        <hr />
+        <footer>
+            <p>&copy; 點亮台灣拍貼機</p>
+        </footer>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+        // http://stackoverflow.com/questions/26415778/getusermedia-video-size-in-firefox-chrome-differs
+        var video_constraints = {
+            width: { min: 360, max: 360 },
+            height: { min: 360, max: 360 },
+            require: ["width", "height"] // needed pre-Firefox 38 (non-spec)
+        };
+
+        function getMedia() {
+            if (navigator.webkitGetUserMedia) {
+                var wkConstraints = { mandatory: {} };
+                var c = video_constraints;
+                for (var i in c) {
+                    switch (i) {
+                        case 'width': for (j in c[i]) {
+                            switch (j) {
+                                case 'max': wkConstraints.mandatory.maxWidth = c[i][j]; break;
+                                case 'min': wkConstraints.mandatory.minWidth = c[i][j]; break;
+                                case 'exact': wkConstraints.mandatory.minWidth = wkConstraints.mandatory.maxWidth = c[i][j]; break;
+                            }
+                        }; break;
+
+                        case 'height': for (var j in c[i]) {
+                            switch (j) {
+                                case 'max': wkConstraints.mandatory.maxHeight = c[i][j]; break;
+                                case 'min': wkConstraints.mandatory.minHeight = c[i][j]; break;
+                                case 'exact': wkConstraints.mandatory.minHeight = wkConstraints.mandatory.maxHeight = c[i][j]; break;
+                            }
+                        }; break;
+                        default: break;
+                    }
+                }
+                video_constraints = wkConstraints;
+            }
+
+            navigator.getUserMedia = (navigator.getUserMedia ||
+                                    navigator.webkitGetUserMedia ||
+                                    navigator.mozGetUserMedia);
+
+            if (!navigator.getUserMedia) {
+                alert("your browser doesn't support getUserMedia")
+            }
+
+            navigator.getUserMedia(
+                    {
+                        video: video_constraints,
+                        audio: false,
+                    },
+                    function (stream) {
+                        if (navigator.mozGetUserMedia) {
+                            video.mozSrcObject = stream;
+                        }
+                        else {
+                            var URL = window.URL || window.webkitURL;
+                            video.src = URL.createObjectURL(stream);
+                        }
+                        video.play();
+                    },
+                    function (err) {
+                        console.log(err);
+                    }
+                    );
+        }
+
+        var video = document.querySelector('video');
+        video.addEventListener('playing', loopStart, false);
+        function loopStart() {
+            this.removeEventListener('playing', loopStart);
+            if (this.videoHeight === 0) {
+                window.setTimeout(function () {
+                    this.pause();
+                    this.play();
+                    loopStart();
+                }, 100);
+            }
+            else {
+                this.setAttribute('width', this.videoWidth);
+                this.setAttribute('height', this.videoHeight);
+            }
+        }
+
+        getMedia();
+
+        var canvas = document.getElementById("canvas"),
+            context = canvas.getContext("2d");
+
+        $("#snap").click(function () {
+            context.drawImage(video, 0, 0, 480, 480);
+            var images = new Image();
+            images.src = $("#selectedImmg").val();
+            context.drawImage(images, 0, 0, 480, 480);
+        });
+
+        $("#Mask label").click(function () {
+            $("#Mask label").removeClass("active");
+            $(this).addClass("active");
+            var src = $(this).children().attr("src");
+            $("#selectedImmg").val(src);
+            $("#container label").css("background-image", "url('" + src + "')");
+        });
+    </script>
+</body>
+</html>
