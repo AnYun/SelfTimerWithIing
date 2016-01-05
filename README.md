@@ -6,7 +6,7 @@
 
 # Demo #
 
-[Dropbox 空間](https://dl.dropboxusercontent.com/u/10517708/SelfTimerWithIing/index.html) (可能有流量限制，導致無法連上)
+[Github Pages](https://anyun.github.io/SelfTimerWithIing/)
 
 # 參考 #
 
